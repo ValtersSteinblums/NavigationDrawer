@@ -15,23 +15,16 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        drawer = findViewById(R.id.drawer)
+        drawer = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
-        val toggle = ActionBarDrawerToggle(
-            this@MainActivity,
-            drawer,
-            toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
+        val toggle = ActionBarDrawerToggle(this@MainActivity,drawer, toolbar,
+            R.string.navigation_drawer_open,R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -49,12 +42,14 @@ class MainActivity : AppCompatActivity() {
                         .replace(R.id.fragment_container, MessageFragment())
                         .commit()
                 }
+
                 R.id.nav_chat -> {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container, ChatFragment())
                         .commit()
                 }
+
                 R.id.nav_profile -> {
                     supportFragmentManager
                         .beginTransaction()
@@ -62,10 +57,13 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
                 R.id.nav_send -> {
-                    Toast.makeText(this@MainActivity, "Send pressed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Send clicked", Toast.LENGTH_SHORT).show()
                 }
+
                 R.id.nav_share -> {
-                    Toast.makeText(this@MainActivity, "Share pressed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Share clicked", Toast.LENGTH_SHORT)
+                        .show()
+
                 }
             }
             drawer.closeDrawer(GravityCompat.START)
@@ -73,7 +71,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @Deprecated("Deprecated in Java")
+
+
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
